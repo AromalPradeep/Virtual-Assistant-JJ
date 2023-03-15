@@ -1,4 +1,4 @@
-from gtts import gTTS
+'''from gtts import gTTS
 from pygame import mixer
 
 mytext = 'Hello'
@@ -14,4 +14,24 @@ mixer.music.play()
 
 while mixer.music.get_busy():  # wait for music to finish playing
     pass
+'''
 
+import speech_recognition as speech    # Voice Recognition
+# voice recognizer object
+voice = speech.Recognizer()
+        
+# use microphone
+with speech.Microphone() as source:
+    voice_command = voice.listen(source)
+            
+# check input
+try:
+            
+    text = voice.recognize_google(voice_command)
+    		
+# handle the exceptions
+except speech.UnknownValueError:
+            
+    text = "System could not understand. Please try again."
+
+print(text)
